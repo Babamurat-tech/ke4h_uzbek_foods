@@ -84,3 +84,121 @@ LIMIT 10
 
 </body>
 </html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KE4H Uzbek Food Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+    }
+    header, nav, section {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    header {
+      background-color: #007B5E;
+      color: white;
+    }
+    nav {
+      background: #eee;
+      padding: 10px;
+      display: flex;
+      gap: 15px;
+    }
+    nav a {
+      color: #007B5E;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    code, pre {
+      background: #eaeaea;
+      padding: 10px;
+      display: block;
+      white-space: pre-wrap;
+      border-left: 4px solid #007B5E;
+    }
+    h2 {
+      border-bottom: 2px solid #007B5E;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>KE4H Uzbek Food Project</h1>
+  <p>Exploring Uzbek cuisine using Knowledge Graphs and Language Models</p>
+</header>
+
+<nav>
+  <a href="#sparql">SPARQL Queries</a>
+  <a href="#rdf">RDF from LLM</a>
+</nav>
+
+<section id="sparql">
+  <h2>🔍 SPARQL So‘rovlari</h2>
+  <p>Quyida loyihamizda ishlatilgan asosiy SPARQL so‘rovlari keltirilgan:</p>
+  <h3>1. Pishirish usuli bo‘yicha taomlar</h3>
+  <pre><code>
+SELECT DISTINCT ?dish ?method WHERE {
+  ?dish :hasCookingMethod ?method .
+  FILTER regex(?method, "steamed", "i")
+}
+LIMIT 10
+  </code></pre>
+
+  <h3>2. Mintaqaga ko‘ra taomlar</h3>
+  <pre><code>
+SELECT ?dish WHERE {
+  ?dish :originRegion ?region .
+  FILTER(?region = :Samarkand)
+}
+  </code></pre>
+
+  <h3>3. Muqobil ingredientlar bilan taomlar</h3>
+  <pre><code>
+SELECT DISTINCT ?dish WHERE {
+  ?dish :hasIngredient ?ingredient .
+  FILTER regex(?ingredient, "carrot|cumin", "i")
+}
+ORDER BY ?dish
+  </code></pre>
+</section>
+
+<section id="rdf">
+  <h2>🔗 RDF Uchliklar (LLM asosida)</h2>
+  <p>Quyida ChatGPT orqali olingan ma’lumot RDF formatiga o‘tkazildi:</p>
+
+  <h3>Plov misoli</h3>
+  <pre><code>
+@prefix : &lt;http://example.org/uzfood#&gt; .
+
+:plov a :UzbekDish ;
+      :hasIngredient :rice, :carrot, :onion, :lamb, :vegetableOil, :cumin ;
+      :originRegion :Samarkand ;
+      :hasCookingMethod :friedAndSteamed ;
+      :cookedOnHoliday "wedding" ;
+      :description "Served at weddings and celebrations" .
+  </code></pre>
+
+  <p>LLM prompt:</p>
+  <pre><code>
+"Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
+  </code></pre>
+</section>
+
+</body>
+</html>
