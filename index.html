@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KE4H Project – Uzbek Food Knowledge Graph</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+    nav { background: #2c3e50; color: #fff; padding: 1rem; }
+    nav a { color: #fff; margin: 0 10px; text-decoration: none; }
+    section { padding: 2rem; }
+    h1, h2 { color: #2c3e50; }
+    pre { background: #f4f4f4; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#intro">Introduction</a>
+    <a href="#method">Methodology</a>
+    <a href="#sparql">SPARQL Queries</a>
+    <a href="#llm">LLM & RDF</a>
+    <a href="#results">Results</a>
+  </nav>
+
+  <section id="intro">
+    <h1>KE4H Project: Uzbek Food Knowledge Graph</h1>
+    <p>This project explores the representation and enrichment of Uzbek food culture using Knowledge Graphs and Large Language Models.</p>
+  </section>
+
+  <section id="method">
+    <h2>Methodology</h2>
+    <p>We started by identifying gaps in existing food-related knowledge graphs. We then used SPARQL to query Wikidata, and LLMs like ChatGPT to generate additional structured data. Finally, we transformed this data into RDF triples and visualized the results.</p>
+  </section>
+
+  <section id="sparql">
+    <h2>SPARQL Queries</h2>
+    <pre>
+# Example Query
+SELECT DISTINCT ?foodLabel ?regionLabel WHERE {
+  ?food wdt:P31 wd:Q2095 ;
+        wdt:P495 wd:Q265 .
+  OPTIONAL { ?food wdt:P495 ?region. }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+LIMIT 10
+    </pre>
+  </section>
+
+  <section id="llm">
+    <h2>LLM Prompts & RDF Triples</h2>
+    <h3>Prompt:</h3>
+    <pre>
+"Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
+    </pre>
+
+    <h3>LLM Output:</h3>
+    <pre>
+{
+  "name": "Plov",
+  "ingredients": ["rice", "carrot", "onion", "lamb", "vegetable oil", "cumin"],
+  "region": "Samarkand",
+  "cooking_method": "fried and steamed",
+  "cultural_note": "Served at weddings and celebrations"
+}
+    </pre>
+
+    <h3>RDF Triples:</h3>
+    <pre>
+@prefix : <http://example.org/uzfood#> .
+
+:plov a :UzbekDish ;
+      :hasIngredient :rice, :carrot, :onion, :lamb, :vegetableOil, :cumin ;
+      :originRegion :Samarkand ;
+      :hasCookingMethod :friedAndSteamed ;
+      :description "Served at weddings and celebrations" .
+    </pre>
+  </section>
+
+  <section id="results">
+    <h2>Discussion & Results</h2>
+    <p>We observed that different LLMs provide varying degrees of structure and accuracy. RDF triples were manually verified, and some required adjustments to match ontological constraints. This method demonstrated the potential of LLMs in semantic enrichment.</p>
+  </section>
+
+</body>
+</html>
