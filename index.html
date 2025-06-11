@@ -69,41 +69,53 @@
   </section>
 
 <section id="llm-comparison">
-  <h2>LLM Comparison: ChatGPT vs Gemini</h2>
-  
-  <p>We used two large language models—<strong>ChatGPT</strong> and <strong>Gemini</strong>—to generate structured information about traditional Uzbek dishes. Below we compare their outputs based on the same prompt:</p>
+  <h2>🧠 LLM Comparison</h2>
 
-  <blockquote>
-    "Please describe the Uzbek dish <i>plov</i> in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
-  </blockquote>
+  <p>In this section, we compare how different Large Language Models (LLMs) describe Uzbek dishes based on a given prompt. The goal is to evaluate the completeness, structure, and RDF compatibility of their outputs.</p>
 
-  <h3>🍽 ChatGPT Output</h3>
-  <pre><code>{
+  <h3>📌 Prompt</h3>
+  <p><code>"Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."</code></p>
+
+  <h3>🤖 ChatGPT Output</h3>
+  <pre>
+{
   "name": "Plov",
   "ingredients": ["rice", "carrot", "onion", "lamb", "vegetable oil", "cumin"],
   "region": "Samarkand",
   "cooking_method": "fried and steamed",
   "cultural_note": "Served at weddings and celebrations"
-}</code></pre>
+}
+  </pre>
 
-  <h3>🍽 Gemini Output</h3>
-  <pre><code>{
+  <h3>🤖 Gemini Output</h3>
+  <pre>
+{
   "name": "Plov",
-  "ingredients": ["rice", "carrot", "meat (usually lamb or beef)", "onion", "garlic", "spices (cumin, pepper)", "vegetable oil"],
-  "region": "Uzbekistan (especially Tashkent and Samarkand)",
-  "cooking_method": "slow-cooked in layers",
-  "cultural_note": "Symbol of hospitality; often prepared for guests and ceremonies"
-}</code></pre>
+  "ingredients": ["long-grain rice", "beef or lamb", "carrots", "onions", "vegetable oil", "barberries"],
+  "region": "Tashkent",
+  "cooking_method": "cooked in layers in kazan",
+  "cultural_note": "Popular national dish served during holidays"
+}
+  </pre>
 
-  <h3>🔍 Key Differences</h3>
+  <h3>🆚 Comparison Summary</h3>
   <ul>
-    <li><strong>Ingredients:</strong> Gemini provides more detailed ingredients (e.g. garlic, beef).</li>
-    <li><strong>Cooking Method:</strong> ChatGPT says "fried and steamed", while Gemini says "slow-cooked in layers".</li>
-    <li><strong>Cultural Note:</strong> Gemini emphasizes hospitality, ChatGPT mentions celebrations and weddings.</li>
-    <li><strong>Region:</strong> ChatGPT specifies Samarkand; Gemini says Uzbekistan overall, including Tashkent.</li>
+    <li>✅ Both models accurately identified key ingredients and cultural context.</li>
+    <li>⚠️ Gemini mentioned regional variation and unique ingredients (e.g., barberries).</li>
+    <li>⚠️ ChatGPT output is more structured and RDF-friendly.</li>
   </ul>
 
-  <p>This comparison shows how different LLMs highlight varying aspects of cultural knowledge. Both can be valuable for enriching datasets but may require validation for factual consistency.</p>
+  <h3>📦 RDF Triples Example from ChatGPT</h3>
+  <pre>
+@prefix : &lt;http://example.org/uzfood#&gt; .
+
+:plov a :UzbekDish ;
+      :hasIngredient :rice, :carrot, :onion, :lamb, :vegetableOil, :cumin ;
+      :originRegion :Samarkand ;
+      :hasCookingMethod :friedAndSteamed ;
+      :cookedOnHoliday "wedding" ;
+      :description "Served at weddings and celebrations" .
+  </pre>
 </section>
 
   
