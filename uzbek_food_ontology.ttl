@@ -1,0 +1,30 @@
+# fayl nomi: uzbek_food_ontology.ttl
+
+@prefix : <http://example.org/uzfood#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:UzbekDish rdf:type rdfs:Class .
+:Ingredient rdf:type rdfs:Class .
+:CookingMethod rdf:type rdfs:Class .
+:Region rdf:type rdfs:Class .
+
+:hasIngredient rdf:type rdf:Property ;
+    rdfs:domain :UzbekDish ;
+    rdfs:range :Ingredient .
+
+:originRegion rdf:type rdf:Property ;
+    rdfs:domain :UzbekDish ;
+    rdfs:range :Region .
+
+:hasCookingMethod rdf:type rdf:Property ;
+    rdfs:domain :UzbekDish ;
+    rdfs:range :CookingMethod .
+
+:cookedOnHoliday rdf:type rdf:Property ;
+    rdfs:domain :UzbekDish ;
+    rdfs:range rdfs:Literal .
+
+:description rdf:type rdf:Property ;
+    rdfs:domain :UzbekDish ;
+    rdfs:range rdfs:Literal .
