@@ -68,6 +68,45 @@
     <p>We started by identifying gaps in existing food-related knowledge graphs. We then used SPARQL to query Wikidata, and LLMs like ChatGPT to generate additional structured data. Finally, we transformed this data into RDF triples and visualized the results.</p>
   </section>
 
+<section id="llm-comparison">
+  <h2>LLM Comparison: ChatGPT vs Gemini</h2>
+  
+  <p>We used two large language models—<strong>ChatGPT</strong> and <strong>Gemini</strong>—to generate structured information about traditional Uzbek dishes. Below we compare their outputs based on the same prompt:</p>
+
+  <blockquote>
+    "Please describe the Uzbek dish <i>plov</i> in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
+  </blockquote>
+
+  <h3>🍽 ChatGPT Output</h3>
+  <pre><code>{
+  "name": "Plov",
+  "ingredients": ["rice", "carrot", "onion", "lamb", "vegetable oil", "cumin"],
+  "region": "Samarkand",
+  "cooking_method": "fried and steamed",
+  "cultural_note": "Served at weddings and celebrations"
+}</code></pre>
+
+  <h3>🍽 Gemini Output</h3>
+  <pre><code>{
+  "name": "Plov",
+  "ingredients": ["rice", "carrot", "meat (usually lamb or beef)", "onion", "garlic", "spices (cumin, pepper)", "vegetable oil"],
+  "region": "Uzbekistan (especially Tashkent and Samarkand)",
+  "cooking_method": "slow-cooked in layers",
+  "cultural_note": "Symbol of hospitality; often prepared for guests and ceremonies"
+}</code></pre>
+
+  <h3>🔍 Key Differences</h3>
+  <ul>
+    <li><strong>Ingredients:</strong> Gemini provides more detailed ingredients (e.g. garlic, beef).</li>
+    <li><strong>Cooking Method:</strong> ChatGPT says "fried and steamed", while Gemini says "slow-cooked in layers".</li>
+    <li><strong>Cultural Note:</strong> Gemini emphasizes hospitality, ChatGPT mentions celebrations and weddings.</li>
+    <li><strong>Region:</strong> ChatGPT specifies Samarkand; Gemini says Uzbekistan overall, including Tashkent.</li>
+  </ul>
+
+  <p>This comparison shows how different LLMs highlight varying aspects of cultural knowledge. Both can be valuable for enriching datasets but may require validation for factual consistency.</p>
+</section>
+
+  
   <section id="sparql">
     <h2>SPARQL Queries</h2>
     <pre>
