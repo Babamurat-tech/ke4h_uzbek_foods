@@ -30,6 +30,41 @@
 
   <section id="method">
     <h2>Methodology</h2>
+   
+  <p>Our project followed a structured pipeline combining Knowledge Graphs (KG), SPARQL, and Large Language Models (LLMs) to enrich and analyze data about traditional Uzbek foods.</p>
+
+  <h3>Step 1: Topic Selection & KG Vocabulary</h3>
+  <p>We selected “Uzbek Foods” as our domain of interest. We identified relevant RDF classes and properties such as <code>:UzbekDish</code>, <code>:hasIngredient</code>, <code>:originRegion</code>, and <code>:hasCookingMethod</code>.</p>
+
+  <h3>Step 2: SPARQL Queries</h3>
+  <p>We designed multiple SPARQL queries to retrieve and explore existing data from Wikidata. These queries used key SPARQL clauses like: <code>OPTIONAL</code>, <code>FILTER</code> with <code>REGEX</code>, <code>DISTINCT</code>, <code>LIMIT</code>, <code>UNION</code>, and <code>ORDER BY</code>.</p>
+  <p>All SPARQL code was saved in the <code>uzbek_food_queries.txt</code> file.</p>
+
+  <h3>Step 3: LLM-based Enrichment</h3>
+  <p>We used multiple LLMs (ChatGPT and Gemini) to generate structured descriptions of Uzbek dishes like <i>plov</i>, <i>somsa</i>, and <i>manti</i>. The prompts asked the models to provide ingredients, origin, cooking methods, and cultural facts.</p>
+
+  <blockquote>
+    "Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
+  </blockquote>
+
+  <p>The outputs were converted into RDF triples and saved in <code>llm_outputs_and_triples.txt</code>.</p>
+
+  <h3>Step 4: RDF Triples</h3>
+  <p>The triples were written in Turtle format (<code>.ttl</code>) and include custom vocabulary. We used prefixes like:</p>
+  <pre><code>@prefix : &lt;http://example.org/uzfood#&gt; .</code></pre>
+  <p>Each dish was modeled with relevant properties (e.g., <code>:hasIngredient</code>, <code>:originRegion</code>).</p>
+
+  <h3>Step 5: Publishing the Project</h3>
+  <p>We developed a GitHub Pages website to host our project. The site is organized into:</p>
+  <ul>
+    <li>Project Overview</li>
+    <li>SPARQL Results</li>
+    <li>LLM Comparisons</li>
+    <li>RDF Enrichment</li>
+    <li>Final Reflections</li>
+  </ul>
+  <p>🔗 <a href="https://babamurat-tech.github.io/ke4h_uzbek_foods/" target="_blank">View our project site</a></p>
+
     <p>We started by identifying gaps in existing food-related knowledge graphs. We then used SPARQL to query Wikidata, and LLMs like ChatGPT to generate additional structured data. Finally, we transformed this data into RDF triples and visualized the results.</p>
   </section>
 
