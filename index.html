@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Morocco - Soundwaves and Semantic Webs</title>
+  <title>Uzbekistan - Soundwaves and Semantic Webs</title>
   <style>
     body {
       margin: 0;
-      background-color: #e3d7cd;
+      background-color: #f5ede2;
       font-family: 'Georgia', serif;
-      color: #3e2c23;
+      color: #3a2a1f;
       display: flex;
       justify-content: center;
       padding: 40px 20px;
@@ -26,8 +26,8 @@
       font-weight: 700;
       font-size: 3.5rem;
       margin-bottom: 20px;
-      color: #6b2e2e;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      color: #005f4b;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
       display: inline-flex;
       align-items: center;
       gap: 12px;
@@ -44,7 +44,7 @@
       font-size: 1.4rem;
       font-style: italic;
       font-weight: bold;
-      color: #6b2e2e;
+      color: #004c3f;
       margin: 30px 0 15px 0;
       padding-left: 15px;
     }
@@ -63,11 +63,7 @@
       font-size: 1.15rem;
       line-height: 1.6;
       padding: 0 15px;
-      max-width: 900px;
-      margin: 0 auto;
       color: #4a372c;
-      background: transparent;
-      box-shadow: none;
       text-align: center;
     }
 
@@ -78,18 +74,18 @@
     }
 
     th, td {
-      border: 2px solid #a0522d;
+      border: 2px solid #708f6b;
       padding: 12px 15px;
       vertical-align: top;
       text-align: left;
       background: transparent;
-      color: #3e2c23;
+      color: #3a2a1f;
       font-family: 'Georgia', serif;
       font-size: 1rem;
     }
 
     th {
-      color: #a0522d;
+      color: #1d573e;
       font-weight: bold;
       font-style: italic;
       font-size: 1.15rem;
@@ -97,7 +93,7 @@
 
     td code {
       font-family: Consolas, monospace;
-      background: #f5f1ee;
+      background: #f7f4ef;
       padding: 8px;
       display: block;
       white-space: pre-wrap;
@@ -109,21 +105,19 @@
 </head>
 <body>
   <div class="container">
-    <h1>Morocco <span class="flag">🇲🇦</span></h1>
-    <img src="assets/images/morocco.jpg" alt="Morocco musical heritage" />
+    <h1>Uzbekistan <span class="flag">🇺🇿</span></h1>
+    <img src="assets/images/uzbekistan_music.jpg" alt="Uzbekistan musical heritage" />
     <p class="intro">
-      Known for its diverse rhythms and deep-rooted traditions, Morocco’s musical heritage reflects a unique fusion of Amazigh, Arab, Andalusian, and sub-Saharan influences that have shaped the country’s cultural and historical identity. From the hypnotic rhythms of Gnawa spiritual music to the emotive calls of Aita and the elegance of Andalusi orchestras, Moroccan music expresses both the regional variety and the shared cultural memory of its people.
-      <br /><br />
-      In this section, we explore how these musical expressions can be understood and represented using digital tools such as SPARQL queries, Wikidata’s knowledge graph, and large language models (LLMs).
+      O‘zbekistonning musiqiy merosi asrlar davomida rivojlangan boy an’analarga ega. Maqom, folklor ashulalar, milliy cholg‘ular, va zamonaviy musiqa janrlari – barchasi bu yurtning o‘ziga xos madaniy ko‘zgusidir. Ushbu sahifada biz SPARQL so‘rovlari, Wikidata bilim grafigi va sun’iy intellekt vositalari orqali ushbu boy merosni tahlil qilamiz.
     </p>
 
-    <div class="subtitle">🎵 <em>Interpreting SPARQL Queries and Results:</em></div>
+    <div class="subtitle">🎵 <em>SPARQL so‘rovlari va natijalar izohi:</em></div>
 
     <table>
       <thead>
         <tr>
-          <th>Query</th>
-          <th>Result</th>
+          <th>So‘rov (Query)</th>
+          <th>Natija (Tushuntirish)</th>
         </tr>
       </thead>
       <tbody>
@@ -131,7 +125,7 @@
           <td><code>
 SELECT ?genre ?genreLabel ?description ?image WHERE {<br>
   ?genre wdt:P31/wdt:P279* wd:Q188451.<br>
-  ?genre wdt:P495 wd:Q1028.<br>
+  ?genre wdt:P495 wd:Q265.<br>
   OPTIONAL { ?genre schema:description ?description. FILTER(LANG(?description) = "en") }<br>
   OPTIONAL { ?genre wdt:P18 ?image. }<br>
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
@@ -139,7 +133,7 @@ SELECT ?genre ?genreLabel ?description ?image WHERE {<br>
 LIMIT 50
           </code></td>
           <td>
-            Retrieves Moroccan music genres with descriptions and images, providing a window into the country’s musical diversity.
+            O‘zbekistonga oid musiqa janrlarini (maqom, folklor, va boshqalar) tavsifi va tasvirlari bilan qaytaradi.
           </td>
         </tr>
 
@@ -147,7 +141,7 @@ LIMIT 50
           <td><code>
 SELECT DISTINCT ?artist ?artistLabel ?description ?image WHERE {<br>
   ?artist wdt:P31 wd:Q5.<br>
-  ?artist wdt:P27 wd:Q1028.<br>
+  ?artist wdt:P27 wd:Q265.<br>
   { ?artist wdt:P106 wd:Q639669. } UNION { ?artist wdt:P106 wd:Q36834. }<br>
   OPTIONAL { ?artist schema:description ?description. FILTER(LANG(?description) = "en") }<br>
   OPTIONAL { ?artist wdt:P18 ?image. }<br>
@@ -157,7 +151,7 @@ ORDER BY ?artistLabel<br>
 LIMIT 100
           </code></td>
           <td>
-            Lists Moroccan singers and musicians, though mostly older ones due to limited modern representation.
+            O‘zbekistonda tug‘ilgan mashhur musiqachilar va xonandalarni ko‘rsatadi, ko‘pincha tarixiy shaxslar ustuvor.
           </td>
         </tr>
 
@@ -165,7 +159,7 @@ LIMIT 100
           <td><code>
 SELECT ?band ?bandLabel ?description ?image WHERE {<br>
   ?band wdt:P31/wdt:P279* wd:Q215380.<br>
-  ?band wdt:P495 wd:Q1028.<br>
+  ?band wdt:P495 wd:Q265.<br>
   OPTIONAL { ?band schema:description ?description. FILTER(LANG(?description) = "en") }<br>
   OPTIONAL { ?band wdt:P18 ?image. }<br>
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
@@ -173,7 +167,7 @@ SELECT ?band ?bandLabel ?description ?image WHERE {<br>
 LIMIT 50
           </code></td>
           <td>
-            Shows Moroccan musical groups or ensembles, highlighting collective performances in the country.
+            O‘zbek musiqiy guruh va ansambllar haqida ma’lumot beradi.
           </td>
         </tr>
 
@@ -182,7 +176,7 @@ LIMIT 50
 SELECT DISTINCT ?work ?workLabel ?description ?image WHERE {<br>
   VALUES ?type { wd:Q7366 wd:Q482994 }<br>
   ?work wdt:P31 ?type.<br>
-  ?work wdt:P495 wd:Q1028.<br>
+  ?work wdt:P495 wd:Q265.<br>
   OPTIONAL { ?work schema:description ?description. FILTER(LANG(?description) = "en") }<br>
   OPTIONAL { ?work wdt:P18 ?image. }<br>
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
@@ -190,7 +184,7 @@ SELECT DISTINCT ?work ?workLabel ?description ?image WHERE {<br>
 LIMIT 100
           </code></td>
           <td>
-            Fetches Moroccan songs and albums. Results show minimal coverage—just a few songs and no albums.
+            O‘zbekistonga tegishli qo‘shiqlar va albomlarni ko‘rsatadi (lekin Wikidata’da bu ma’lumotlar juda cheklangan).
           </td>
         </tr>
 
@@ -198,7 +192,7 @@ LIMIT 100
           <td><code>
 SELECT ?musician ?musicianLabel ?description ?image WHERE {<br>
   ?musician wdt:P31 wd:Q5.<br>
-  ?musician wdt:P27 wd:Q1028.<br>
+  ?musician wdt:P27 wd:Q265.<br>
   OPTIONAL { ?musician schema:description ?description. FILTER(LANG(?description) = "en") }<br>
   OPTIONAL { ?musician wdt:P18 ?image. }<br>
   FILTER(<br>
@@ -211,7 +205,7 @@ ORDER BY ?musicianLabel<br>
 LIMIT 100
           </code></td>
           <td>
-            Targets Moroccan rappers using regex, but results are outdated—mostly older or misclassified figures.
+            O‘zbek rep ijodkorlarini aniqlaydi, lekin ma’lumotlar cheklangan va ba’zi noto‘g‘ri tasniflanganlar mavjud.
           </td>
         </tr>
       </tbody>
