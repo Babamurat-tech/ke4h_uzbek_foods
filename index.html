@@ -2,334 +2,220 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KE4H Project – Uzbek Food Knowledge Graph</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-    nav { background: #2c3e50; color: #fff; padding: 1rem; }
-    nav a { color: #fff; margin: 0 10px; text-decoration: none; }
-    section { padding: 2rem; }
-    h1, h2 { color: #2c3e50; }
-    pre { background: #f4f4f4; padding: 1rem; overflow-x: auto; }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <a href="#intro">Introduction</a>
-    <a href="#method">Methodology</a>
-    <a href="#sparql">SPARQL Queries</a>
-    <a href="#llm">LLM & RDF</a>
-    <a href="#results">Results</a>
-  </nav>
-
-  <section id="intro">
-    <h1>KE4H Project: Uzbek Food Knowledge Graph</h1>
-    <p>This project explores the representation and enrichment of Uzbek food culture using Knowledge Graphs and Large Language Models.</p>
-  </section>
-
-  <section id="method">
-    <h2>Methodology</h2>
-   
-  <p>Our project followed a structured pipeline combining Knowledge Graphs (KG), SPARQL, and Large Language Models (LLMs) to enrich and analyze data about traditional Uzbek foods.</p>
-
-  <h3>Step 1: Topic Selection & KG Vocabulary</h3>
-  <p>We selected “Uzbek Foods” as our domain of interest. We identified relevant RDF classes and properties such as <code>:UzbekDish</code>, <code>:hasIngredient</code>, <code>:originRegion</code>, and <code>:hasCookingMethod</code>.</p>
-
-  <h3>Step 2: SPARQL Queries</h3>
-  <p>We designed multiple SPARQL queries to retrieve and explore existing data from Wikidata. These queries used key SPARQL clauses like: <code>OPTIONAL</code>, <code>FILTER</code> with <code>REGEX</code>, <code>DISTINCT</code>, <code>LIMIT</code>, <code>UNION</code>, and <code>ORDER BY</code>.</p>
-  <p>All SPARQL code was saved in the <code>uzbek_food_queries.txt</code> file.</p>
-
-  <h3>Step 3: LLM-based Enrichment</h3>
-  <p>We used multiple LLMs (ChatGPT and Gemini) to generate structured descriptions of Uzbek dishes like <i>plov</i>, <i>somsa</i>, and <i>manti</i>. The prompts asked the models to provide ingredients, origin, cooking methods, and cultural facts.</p>
-
-  <blockquote>
-    "Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
-  </blockquote>
-
-  <p>The outputs were converted into RDF triples and saved in <code>llm_outputs_and_triples.txt</code>.</p>
-
-  <h3>Step 4: RDF Triples</h3>
-  <p>The triples were written in Turtle format (<code>.ttl</code>) and include custom vocabulary. We used prefixes like:</p>
-  <pre><code>@prefix : &lt;http://example.org/uzfood#&gt; .</code></pre>
-  <p>Each dish was modeled with relevant properties (e.g., <code>:hasIngredient</code>, <code>:originRegion</code>).</p>
-
-  <h3>Step 5: Publishing the Project</h3>
-  <p>We developed a GitHub Pages website to host our project. The site is organized into:</p>
-  <ul>
-    <li>Project Overview</li>
-    <li>SPARQL Results</li>
-    <li>LLM Comparisons</li>
-    <li>RDF Enrichment</li>
-    <li>Final Reflections</li>
-  </ul>
-  <p>🔗 <a href="https://babamurat-tech.github.io/ke4h_uzbek_foods/" target="_blank">View our project site</a></p>
-
-    <p>We started by identifying gaps in existing food-related knowledge graphs. We then used SPARQL to query Wikidata, and LLMs like ChatGPT to generate additional structured data. Finally, we transformed this data into RDF triples and visualized the results.</p>
-  </section>
-
-<section id="llm-comparison">
-  <h2>🧠 LLM Comparison</h2>
-
-  <p>In this section, we compare how different Large Language Models (LLMs) describe Uzbek dishes based on a given prompt. The goal is to evaluate the completeness, structure, and RDF compatibility of their outputs.</p>
-
-  <h3>📌 Prompt</h3>
-  <p><code>"Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."</code></p>
-
-  <h3>🤖 ChatGPT Output</h3>
-  <pre>
-{
-  "name": "Plov",
-  "ingredients": ["rice", "carrot", "onion", "lamb", "vegetable oil", "cumin"],
-  "region": "Samarkand",
-  "cooking_method": "fried and steamed",
-  "cultural_note": "Served at weddings and celebrations"
-}
-  </pre>
-
-  <h3>🤖 Gemini Output</h3>
-  <pre>
-{
-  "name": "Plov",
-  "ingredients": ["long-grain rice", "beef or lamb", "carrots", "onions", "vegetable oil", "barberries"],
-  "region": "Tashkent",
-  "cooking_method": "cooked in layers in kazan",
-  "cultural_note": "Popular national dish served during holidays"
-}
-  </pre>
-
-  <h3>🆚 Comparison Summary</h3>
-  <ul>
-    <li>✅ Both models accurately identified key ingredients and cultural context.</li>
-    <li>⚠️ Gemini mentioned regional variation and unique ingredients (e.g., barberries).</li>
-    <li>⚠️ ChatGPT output is more structured and RDF-friendly.</li>
-  </ul>
-
-  <h3>📦 RDF Triples Example from ChatGPT</h3>
-  <pre>
-@prefix : &lt;http://example.org/uzfood#&gt; .
-
-:plov a :UzbekDish ;
-      :hasIngredient :rice, :carrot, :onion, :lamb, :vegetableOil, :cumin ;
-      :originRegion :Samarkand ;
-      :hasCookingMethod :friedAndSteamed ;
-      :cookedOnHoliday "wedding" ;
-      :description "Served at weddings and celebrations" .
-  </pre>
-</section>
-
-
-  <section id="sparql-queries">
-  <h2>🔎 SPARQL Queries</h2>
-
-  <p>This section presents example SPARQL queries used to extract structured knowledge about Uzbek dishes from the knowledge graph. The queries aim to retrieve ingredients, cooking methods, and regional associations.</p>
-
-  <h3>🥘 Query 1: List all dishes with their ingredients</h3>
-  <pre>
-SELECT ?dish ?ingredient
-WHERE {
-  ?dish a :UzbekDish ;
-        :hasIngredient ?ingredient .
-}
-  </pre>
-
-  <h3>🏞️ Query 2: List dishes and their origin region</h3>
-  <pre>
-SELECT ?dish ?region
-WHERE {
-  ?dish a :UzbekDish ;
-        :originRegion ?region .
-}
-  </pre>
-
-  <h3>🔥 Query 3: Dishes cooked by frying method</h3>
-  <pre>
-SELECT ?dish
-WHERE {
-  ?dish a :UzbekDish ;
-        :hasCookingMethod :friedAndSteamed .
-}
-  </pre>
-
-  <p>These SPARQL queries were tested using the RDF triples generated by LLMs and edited using TTL syntax.</p>
-</section>
-
-  
-  <section id="sparql">
-    <h2>SPARQL Queries</h2>
-    <pre>
-# Example Query
-SELECT DISTINCT ?foodLabel ?regionLabel WHERE {
-  ?food wdt:P31 wd:Q2095 ;
-        wdt:P495 wd:Q265 .
-  OPTIONAL { ?food wdt:P495 ?region. }
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-}
-LIMIT 10
-    </pre>
-  </section>
-
-  <section id="llm">
-    <h2>LLM Prompts & RDF Triples</h2>
-    <h3>Prompt:</h3>
-    <pre>
-"Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
-    </pre>
-
-    <h3>LLM Output:</h3>
-    <pre>
-{
-  "name": "Plov",
-  "ingredients": ["rice", "carrot", "onion", "lamb", "vegetable oil", "cumin"],
-  "region": "Samarkand",
-  "cooking_method": "fried and steamed",
-  "cultural_note": "Served at weddings and celebrations"
-}
-    </pre>
-
-    <h3>RDF Triples:</h3>
-    <pre>
-@prefix : <http://example.org/uzfood#> .
-
-:plov a :UzbekDish ;
-      :hasIngredient :rice, :carrot, :onion, :lamb, :vegetableOil, :cumin ;
-      :originRegion :Samarkand ;
-      :hasCookingMethod :friedAndSteamed ;
-      :description "Served at weddings and celebrations" .
-    </pre>
-  </section>
-  
-<section id="ttl-file">
-  <h2>📁 RDF Fayl</h2>
-  <p>Ushbu sahifada foydalanilgan RDF uchliklar to‘liq .ttl formatida quyidagi faylda saqlangan:</p>
-  <p>
-    <a href="uzbek_foods.ttl" target="_blank">uzbek_foods.ttl ni ko‘rish yoki yuklab olish</a>
-  </p>
-</section>
-
-  <section id="results">
-    <h2>Discussion & Results</h2>
-    <p>We observed that different LLMs provide varying degrees of structure and accuracy. RDF triples were manually verified, and some required adjustments to match ontological constraints. This method demonstrated the potential of LLMs in semantic enrichment.</p>
-  </section>
-
-</body>
-</html>
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KE4H Uzbek Food Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Morocco - Soundwaves and Semantic Webs</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
       margin: 0;
-      padding: 0;
-      background: #f8f8f8;
-    }
-    header, nav, section {
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    header {
-      background-color: #007B5E;
-      color: white;
-    }
-    nav {
-      background: #eee;
-      padding: 10px;
+      background-color: #e3d7cd;
+      font-family: 'Georgia', serif;
+      color: #3e2c23;
       display: flex;
-      gap: 15px;
+      justify-content: center;
+      padding: 40px 20px;
     }
-    nav a {
-      color: #007B5E;
-      text-decoration: none;
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-style: italic;
+      font-weight: 700;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: #6b2e2e;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    h1 .flag {
+      font-size: 3.8rem;
+      transform: translateY(3px);
+    }
+
+    .subtitle {
+      text-align: left;
+      font-size: 1.4rem;
+      font-style: italic;
       font-weight: bold;
+      color: #6b2e2e;
+      margin: 30px 0 15px 0;
+      padding-left: 15px;
     }
-    code, pre {
-      background: #eaeaea;
-      padding: 10px;
+
+    img {
+      width: 65%;
+      max-width: 650px;
+      height: auto;
+      border-radius: 8px;
+      margin: 0 auto 30px auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      display: block;
+    }
+
+    p.intro {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      padding: 0 15px;
+      max-width: 900px;
+      margin: 0 auto;
+      color: #4a372c;
+      background: transparent;
+      box-shadow: none;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 2px solid #a0522d;
+      padding: 12px 15px;
+      vertical-align: top;
+      text-align: left;
+      background: transparent;
+      color: #3e2c23;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+    }
+
+    th {
+      color: #a0522d;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 1.15rem;
+    }
+
+    td code {
+      font-family: Consolas, monospace;
+      background: #f5f1ee;
+      padding: 8px;
       display: block;
       white-space: pre-wrap;
-      border-left: 4px solid #007B5E;
-    }
-    h2 {
-      border-bottom: 2px solid #007B5E;
-      padding-bottom: 5px;
-      margin-top: 40px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border: 1px solid #c0b3a5;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Morocco <span class="flag">🇲🇦</span></h1>
+    <img src="assets/images/morocco.jpg" alt="Morocco musical heritage" />
+    <p class="intro">
+      Known for its diverse rhythms and deep-rooted traditions, Morocco’s musical heritage reflects a unique fusion of Amazigh, Arab, Andalusian, and sub-Saharan influences that have shaped the country’s cultural and historical identity. From the hypnotic rhythms of Gnawa spiritual music to the emotive calls of Aita and the elegance of Andalusi orchestras, Moroccan music expresses both the regional variety and the shared cultural memory of its people.
+      <br /><br />
+      In this section, we explore how these musical expressions can be understood and represented using digital tools such as SPARQL queries, Wikidata’s knowledge graph, and large language models (LLMs).
+    </p>
 
-<header>
-  <h1>KE4H Uzbek Food Project</h1>
-  <p>Exploring Uzbek cuisine using Knowledge Graphs and Language Models</p>
-</header>
+    <div class="subtitle">🎵 <em>Interpreting SPARQL Queries and Results:</em></div>
 
-<nav>
-  <a href="#sparql">SPARQL Queries</a>
-  <a href="#rdf">RDF from LLM</a>
-</nav>
+    <table>
+      <thead>
+        <tr>
+          <th>Query</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>
+SELECT ?genre ?genreLabel ?description ?image WHERE {<br>
+  ?genre wdt:P31/wdt:P279* wd:Q188451.<br>
+  ?genre wdt:P495 wd:Q1028.<br>
+  OPTIONAL { ?genre schema:description ?description. FILTER(LANG(?description) = "en") }<br>
+  OPTIONAL { ?genre wdt:P18 ?image. }<br>
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
+}<br>
+LIMIT 50
+          </code></td>
+          <td>
+            Retrieves Moroccan music genres with descriptions and images, providing a window into the country’s musical diversity.
+          </td>
+        </tr>
 
-<section id="sparql">
-  <h2>🔍 SPARQL So‘rovlari</h2>
-  <p>Quyida loyihamizda ishlatilgan asosiy SPARQL so‘rovlari keltirilgan:</p>
-  <h3>1. Pishirish usuli bo‘yicha taomlar</h3>
-  <pre><code>
-SELECT DISTINCT ?dish ?method WHERE {
-  ?dish :hasCookingMethod ?method .
-  FILTER regex(?method, "steamed", "i")
-}
-LIMIT 10
-  </code></pre>
+        <tr>
+          <td><code>
+SELECT DISTINCT ?artist ?artistLabel ?description ?image WHERE {<br>
+  ?artist wdt:P31 wd:Q5.<br>
+  ?artist wdt:P27 wd:Q1028.<br>
+  { ?artist wdt:P106 wd:Q639669. } UNION { ?artist wdt:P106 wd:Q36834. }<br>
+  OPTIONAL { ?artist schema:description ?description. FILTER(LANG(?description) = "en") }<br>
+  OPTIONAL { ?artist wdt:P18 ?image. }<br>
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
+}<br>
+ORDER BY ?artistLabel<br>
+LIMIT 100
+          </code></td>
+          <td>
+            Lists Moroccan singers and musicians, though mostly older ones due to limited modern representation.
+          </td>
+        </tr>
 
-  <h3>2. Mintaqaga ko‘ra taomlar</h3>
-  <pre><code>
-SELECT ?dish WHERE {
-  ?dish :originRegion ?region .
-  FILTER(?region = :Samarkand)
-}
-  </code></pre>
+        <tr>
+          <td><code>
+SELECT ?band ?bandLabel ?description ?image WHERE {<br>
+  ?band wdt:P31/wdt:P279* wd:Q215380.<br>
+  ?band wdt:P495 wd:Q1028.<br>
+  OPTIONAL { ?band schema:description ?description. FILTER(LANG(?description) = "en") }<br>
+  OPTIONAL { ?band wdt:P18 ?image. }<br>
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
+}<br>
+LIMIT 50
+          </code></td>
+          <td>
+            Shows Moroccan musical groups or ensembles, highlighting collective performances in the country.
+          </td>
+        </tr>
 
-  <h3>3. Muqobil ingredientlar bilan taomlar</h3>
-  <pre><code>
-SELECT DISTINCT ?dish WHERE {
-  ?dish :hasIngredient ?ingredient .
-  FILTER regex(?ingredient, "carrot|cumin", "i")
-}
-ORDER BY ?dish
-  </code></pre>
-</section>
+        <tr>
+          <td><code>
+SELECT DISTINCT ?work ?workLabel ?description ?image WHERE {<br>
+  VALUES ?type { wd:Q7366 wd:Q482994 }<br>
+  ?work wdt:P31 ?type.<br>
+  ?work wdt:P495 wd:Q1028.<br>
+  OPTIONAL { ?work schema:description ?description. FILTER(LANG(?description) = "en") }<br>
+  OPTIONAL { ?work wdt:P18 ?image. }<br>
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
+}<br>
+LIMIT 100
+          </code></td>
+          <td>
+            Fetches Moroccan songs and albums. Results show minimal coverage—just a few songs and no albums.
+          </td>
+        </tr>
 
-<section id="rdf">
-  <h2>🔗 RDF Uchliklar (LLM asosida)</h2>
-  <p>Quyida ChatGPT orqali olingan ma’lumot RDF formatiga o‘tkazildi:</p>
-
-  <h3>Plov misoli</h3>
-  <pre><code>
-@prefix : &lt;http://example.org/uzfood#&gt; .
-
-:plov a :UzbekDish ;
-      :hasIngredient :rice, :carrot, :onion, :lamb, :vegetableOil, :cumin ;
-      :originRegion :Samarkand ;
-      :hasCookingMethod :friedAndSteamed ;
-      :cookedOnHoliday "wedding" ;
-      :description "Served at weddings and celebrations" .
-  </code></pre>
-
-  <p>LLM prompt:</p>
-  <pre><code>
-"Please describe the Uzbek dish plov in a structured way, listing ingredients, origin, cooking method, and any cultural notes."
-  </code></pre>
-</section>
-
+        <tr>
+          <td><code>
+SELECT ?musician ?musicianLabel ?description ?image WHERE {<br>
+  ?musician wdt:P31 wd:Q5.<br>
+  ?musician wdt:P27 wd:Q1028.<br>
+  OPTIONAL { ?musician schema:description ?description. FILTER(LANG(?description) = "en") }<br>
+  OPTIONAL { ?musician wdt:P18 ?image. }<br>
+  FILTER(<br>
+    REGEX(LCASE(STR(?description)), "\\brap\\b|\\brapper\\b") &&<br>
+    !REGEX(LCASE(STR(?description)), "photographer|cinematographer")<br>
+  )<br>
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }<br>
+}<br>
+ORDER BY ?musicianLabel<br>
+LIMIT 100
+          </code></td>
+          <td>
+            Targets Moroccan rappers using regex, but results are outdated—mostly older or misclassified figures.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
